@@ -1,0 +1,116 @@
+import { useState } from 'react'
+import ProductCard from './components/ProductCard.jsx'
+import './App.css'
+
+function App() {
+  const [products] = useState([
+    {
+      _id: 'p1',
+      nombre: 'Torta de melocoton',
+      descripcion: 'Bizcocho húmedo, relleno de ganache y un toque de cacao.',
+      precio: 45000,
+      disponible: true,
+      emoji: '🍰',
+      color: 'crema',
+    },
+    {
+      _id: 'p2',
+      nombre: 'Galletas de avena',
+      descripcion: 'Caja x 12, con avena, chips de chocolate y mucho cariño.',
+      precio: 18000,
+      disponible: true,
+      emoji: '🍪',
+      color: 'verde',
+    },
+    {
+      _id: 'p3',
+      nombre: 'Cupcakes de vainilla',
+      descripcion: 'Caja x 6, con crema suave y decoraciones de temporada.',
+      precio: 30000,
+      disponible: false,
+      emoji: '🧁',
+      color: 'rosa',
+    },
+  ])
+
+  return (
+    <div className="storefront">
+      <header className="site-header">
+        <a className="brand" href="#inicio" aria-label="Dulce Horno, inicio">
+          <span className="brand-mark" aria-hidden="true">DH</span>
+          <span>Dulce Horno<small>REPOSTERÍA ARTESANAL</small></span>
+        </a>
+        <nav aria-label="Navegación principal">
+          <a href="#productos">Nuestros postres</a>
+          <a className="header-link" href="#nosotros">Hecho con cariño</a>
+        </nav>
+      </header>
+
+      <main>
+        <section className="hero" id="inicio">
+          <div className="hero-copy">
+            <p className="eyebrow">UN MOMENTO DULCE, HECHO PARA TI</p>
+            <h1>Pequeños antojos,<br /><span>grandes sonrisas.</span></h1>
+            <p className="hero-description">
+              Horneamos cada día con ingredientes ricos y mucho amor. Encuentra tu
+              próximo postre favorito.
+            </p>
+            <a className="primary-link" href="#productos">Explorar el menú <span aria-hidden="true">↓</span></a>
+          </div>
+          <div className="hero-art" role="img" aria-label="Ilustración de una torta decorada">
+            <span className="art-sparkle sparkle-one" aria-hidden="true">✳</span>
+            <span className="art-sparkle sparkle-two" aria-hidden="true">✦</span>
+            <div className="cake">
+              <span className="cake-candle" />
+              <span className="cake-top" />
+              <span className="cake-icing" />
+              <span className="cake-base" />
+              <span className="cake-plate" />
+            </div>
+            <span className="hero-sticker">recién<br />horneado</span>
+          </div>
+        </section>
+
+        <section className="menu-section" id="productos">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">NUESTRO MENÚ</p>
+              <h2>Un capricho para cada día</h2>
+            </div>
+            <p className="section-note">Preparado artesanalmente en nuestra cocina.</p>
+          </div>
+
+          {products.length === 0 ? (
+            <p className="status-message">Pronto agregaremos nuevos postres al menú.</p>
+          ) : (
+            <div className="product-grid">
+              {products.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+            </div>
+          )}
+        </section>
+
+        <section className="about-section" id="nosotros">
+          <span className="about-icon" aria-hidden="true">♡</span>
+          <div>
+            <p className="eyebrow">DE NUESTRA COCINA A TU MESA</p>
+            <h2>Lo simple sabe mejor cuando se hace con cariño.</h2>
+          </div>
+          <p>Recetas cuidadas, ingredientes frescos y una pizca de alegría en cada bocado.</p>
+        </section>
+      </main>
+
+      <footer className="site-footer">
+        <a className="brand footer-brand" href="#inicio">
+          <span className="brand-mark" aria-hidden="true">DH</span>
+          <span>Dulce Horno<small>REPOSTERÍA ARTESANAL</small></span>
+        </a>
+        <p>Un poquito de dulzura hace grande cualquier día.</p>
+        <span>© {new Date().getFullYear()} Dulce Horno</span>
+      </footer>
+    </div>
+  )
+}
+
+export default App
